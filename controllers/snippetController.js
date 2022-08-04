@@ -1,6 +1,39 @@
+
+
 const home = (req, res) => {
-   // res.render('home/index')
-   res.send('hi')
+    res.render('home/index')
+   //res.send('hi')
+}
+const allSnippets = (req, res) => {
+    res.render("snippets/allSnippets")
 }
 
-module.exports = {home}
+const createSnippetForm = (req, res) => {
+    res.render('snippets/createSnippetForm')
+}
+
+const createSnippet = (req, res) => {
+    res.render('snippets/allSnippets')
+}
+
+const updateSnippetForm = (req, res) => {
+    res.render('snippets/updateSnippetForm')
+}
+
+const updateSnippet = (req, res) => {
+    res.render('snippets/allSnippet')
+}
+
+const deleteSnippet = (req, res) => {
+    res.render('snippets/all-snippets')
+}
+
+module.exports = {
+    home,
+    createSnippetForm,
+    createSnippet, 
+    updateSnippet,
+    updateSnippetForm,
+    deleteSnippet,
+    allSnippets
+}
