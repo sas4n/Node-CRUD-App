@@ -1,0 +1,37 @@
+{
+  "name": "assign2",
+  "version": "1.0.0",
+  "description": "server-side rendering crud application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.lnu.se:1dv523/student/rp222hu/a02-crud-code-snippets.git"
+  },
+  "author": "Sasan",
+  "license": "MIT",
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.1.5",
+    "eslint": "^8.13.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsdoc": "^39.2.7",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "prettier": "^2.7.1"
+  },
+  "eslintConfig": {
+    "extends": "@lnu"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-hbs": "^2.4.0",
+    "express-session": "^1.17.3",
+    "moment": "^2.29.4",
+    "mongoose": "^6.5.0",
+    "morgan": "^1.10.0"
+  }
+}
