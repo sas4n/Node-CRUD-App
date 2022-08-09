@@ -8,7 +8,7 @@ const allSnippets = (req, res) => {
     res.render("snippets/allSnippets")
 }
 
-const createSnippetForm = (req, res) => {
+const getCreateSnippetForm = (req, res) => {
     res.render('snippets/createSnippet')
 }
 
@@ -30,7 +30,7 @@ const deleteSnippet = (req, res) => {
 
 module.exports = {
     home,
-    createSnippetForm,
+    getCreateSnippetForm,
     createSnippet, 
     updateSnippet,
     updateSnippetForm,
