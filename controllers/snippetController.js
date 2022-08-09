@@ -9,7 +9,7 @@ const allSnippets = (req, res) => {
 }
 
 const createSnippetForm = (req, res) => {
-    res.render('snippets/createSnippetForm')
+    res.render('snippets/createSnippet')
 }
 
 const createSnippet = (req, res) => {
