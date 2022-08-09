@@ -32,3 +32,34 @@ nav ul li a {
 nav ul li a:hover {
     color: rgba(255, 255, 255, 0.541);
 }
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-between;
+}
+.form-container h3 {
+    font-size: x-large;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    justify-content: space-between;
+    height: 110px;
+}
+.btn {
+    width: 70px;
+    align-self:center;
+}
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
+.button-link {
+    text-decoration: none;
+    background-color: #c7babf;
+  }

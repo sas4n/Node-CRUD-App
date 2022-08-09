@@ -1,0 +1,20 @@
+{{>navbar}}
+<div class="form-container">
+<h3>Login</h3>
+<form action="/authentication/login" method="post">
+    <div class="" id="username">
+        <label for="username">username</label>
+        <input type="text" name="username" id="username" placeholder="Enter username">
+    </div>
+    <div id="passw">
+        <label for="password">password</label>
+        <input type="password" name="password" id="password" placeholder="Enter password">
+    </div>
+    <div class="buttons-container">
+        <a href="/authentication/signup" class="button-link">Sign up</a>
+        <input type="submit" class="btn btn-primary" value="Login">
+        
+    </div>
+    
+</form>
+</div>

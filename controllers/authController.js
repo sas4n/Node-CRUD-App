@@ -1,12 +1,12 @@
 const getSignupForm = (req, res) => {
-    res.render('/signup')
+    res.render('authentication/signup')
 }
 
 const postSignupForm = (req, res) => {
     res.render('/')
 }
 const getLoginForm = (req, res) => {
-    res.render('/login')
+    res.render('authentication/login')
 }
 
 const postLoginForm = (req, res) => {
