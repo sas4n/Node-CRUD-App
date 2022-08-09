@@ -26,6 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(express.urlencoded({ extended : false}))
 
-app.use('/', require('./routes/snippetRouter'))
+app.use('/', require('./routes/homeRouter'))
+app.use('/snippets', require('./routes/snippetRouter'))
+app.use('/authentication', require('./routes/authRouter'))
 
 

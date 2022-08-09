@@ -2,8 +2,6 @@ const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/snippetController')
 
-router.get('/' , controller.home )
-
 router.get('/all-snippets', controller.allSnippets)
 
 router.get('/create-snippet', controller.createSnippetForm)
