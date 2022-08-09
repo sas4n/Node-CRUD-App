@@ -7,12 +7,34 @@ const snippetSchema = new Schema({
         required: true,
         maxLength:60
     },
-    body: {
+    content: {
         type: string,
         required: true,
         maxLength: 1000
+    },
+    ownerId: {
+        type: string,
+        required: true,
     }
 }, {timestamp : true})
 
+const userSchema = new Schema({
+    username:{
+        type: string,
+        required: true,
+        unique: true
+    },
+    password:{
+        type: string,
+        required: true,
+        minLength:6,
+        maxLength:100
+    }
+})
+
 const Snippet = mongoose.model('Snippet', snippetSchema)
-module.exports = Snippet
+const User = mongoose.model('User', userSchema)
+module.exports = {
+    Snippet,
+    User
+}
