@@ -4,15 +4,29 @@ const home = (req, res) => {
     res.render('home/index')
    //res.send('hi')
 }
-const allSnippets = (req, res) => {
-    const snippets = [
-        {id:1, title:'something', owner:'sasan'},{id:2, title:'something else', owner:'saman'}
-    ]
-    res.render('snippets/allSnippets' )
+const allSnippets = async (req, res,next) => {
+    try {
+        const viewData = {
+            snippets: (await Snippet.find({})).map(snippet =>( {
+                id: snippet._id,
+                title: snippet.title,
+                ownerId: snippet.ownerId
+            }))
+        }
+        console.log(viewData)
+        res.render('snippets/allSnippets', {viewData} )
+    }catch (err) {
+        next(err)
+        res.render('home/index')
+    }
 }
 
-const getSnippet = (req, res) => {
-    const viewData = {title:'sasan', content: 'something'}
+const getSnippet = async (req, res) => {
+    const snippet = await Snippet.findById(req.params.id)
+    const viewData = {
+        title:snippet.title, 
+        content: snippet.content
+    }
     res.render('snippets/snippet', {viewData})
 }
 
@@ -28,9 +42,9 @@ const createSnippet = async (req, res,next) => {
             ownerId:"1"
             })
         await snippet.save()
-        res.render('snippets/allSnippets')
+        res.redirect(302,'./all-snippets')
     }catch(error) {
-       // next(error)
+        next(error)
         res.render('./createSnippet')
     }
     
@@ -45,8 +59,15 @@ const updateSnippet = (req, res) => {
     res.render('snippets/allSnippet')
 }
 
-const deleteSnippet = (req, res) => {
-    res.render('snippets/all-snippets')
+const deleteSnippet = async (req, res,next) => {
+    try{
+        await Snippet.findByIdAndDelete(req.params.id)
+        res.redirect(302, '../all-snippets')
+    }catch(err) {
+        next(err)
+        res.render('Snippets/allSnippets')
+    }
+    
 }
 
 module.exports = {
