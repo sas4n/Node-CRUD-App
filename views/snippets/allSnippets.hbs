@@ -1,1 +1,22 @@
 <p>snippets</p>
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>owner</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    {{#each snippets}}
+        <tbody>
+            <tr>
+                <td>{{this.id}}</td>
+                <td><a href="/snippets/snippet/{{this.id}}">{{this.title}}</a></td>
+                <td>{{this.owner}}</td>
+                <td><a href="/snippets/update-snippet/{{this.id}}">Edit</a></td>
+                <td><a href="/snippets/delete-snippet/{{this.id}}">Delete</a></td>
+            </tr>
+        </tbody>
+    {{/each}}
+</table>

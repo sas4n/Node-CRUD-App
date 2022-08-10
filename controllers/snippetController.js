@@ -5,7 +5,15 @@ const home = (req, res) => {
    //res.send('hi')
 }
 const allSnippets = (req, res) => {
-    res.render("snippets/allSnippets")
+    const snippets = [
+        {id:1, title:'something', owner:'sasan'},{id:2, title:'something else', owner:'saman'}
+    ]
+    res.render('snippets/allSnippets', {snippets})
+}
+
+const getSnippet = (req, res) => {
+    const viewData = {title:'sasan', content: 'something'}
+    res.render('snippets/snippet', {viewData})
 }
 
 const getCreateSnippetForm = (req, res) => {
@@ -31,6 +39,7 @@ const deleteSnippet = (req, res) => {
 module.exports = {
     home,
     getCreateSnippetForm,
+    getSnippet,
     createSnippet, 
     updateSnippet,
     updateSnippetForm,

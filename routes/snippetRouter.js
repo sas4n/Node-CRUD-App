@@ -7,6 +7,8 @@ router.get('/all-snippets', controller.allSnippets)
 router.get('/create-snippet', controller.getCreateSnippetForm)
 router.post('/create-snippet', controller.createSnippet)
 
+router.get('/snippet/:id', controller.getSnippet)
+
 router.get('/update-snippet', controller.updateSnippetForm)
 router.post('/updateSnippet/:id', controller.updateSnippet)
 
