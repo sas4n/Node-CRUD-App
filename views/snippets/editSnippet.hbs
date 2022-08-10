@@ -1,0 +1,10 @@
+<div class="form-container">
+    <form action="/snippets/update-snippet" method="POST" class="snippet-form">
+        <input type="hidden" name="id" value={{viewData.id}}>
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" value={{viewData.title}} required>
+        <label for="snippet-content">Content</label>
+        <textarea name="content" id="snippet-content" cols="300" rows="20" placeholder="Type youe code here" spellcheck="true" required>{{viewData.content}}</textarea>
+        <input type="submit" class="btn btn-primary" value="Update">
+    </form>
+</div>

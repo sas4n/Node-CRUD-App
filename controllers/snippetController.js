@@ -13,7 +13,6 @@ const allSnippets = async (req, res,next) => {
                 ownerId: snippet.ownerId
             }))
         }
-        console.log(viewData)
         res.render('snippets/allSnippets', {viewData} )
     }catch (err) {
         next(err)
@@ -22,12 +21,16 @@ const allSnippets = async (req, res,next) => {
 }
 
 const getSnippet = async (req, res) => {
-    const snippet = await Snippet.findById(req.params.id)
-    const viewData = {
-        title:snippet.title, 
-        content: snippet.content
+    try{
+        const snippet = await Snippet.findById(req.params.id)
+        const viewData = {
+            title:snippet.title, 
+            content: snippet.content
+        }
+        res.render('snippets/snippet', {viewData})
+    }catch(err){
+        next(err)
     }
-    res.render('snippets/snippet', {viewData})
 }
 
 const getCreateSnippetForm = (req, res) => {
@@ -51,12 +54,33 @@ const createSnippet = async (req, res,next) => {
     
 }
 
-const updateSnippetForm = (req, res) => {
-    res.render('snippets/updateSnippetForm')
+const updateSnippetForm = async (req, res,next) => {
+    try{
+        const snippet = await Snippet.findById(req.params.id)
+        const viewData = {
+            id: snippet._id,
+            title: snippet.title,
+            content: snippet.content
+        }
+        res.render('snippets/editSnippet', {viewData})
+    }catch(error) {
+        next(error)
+    }
+    
 }
 
-const updateSnippet = (req, res) => {
-    res.render('snippets/allSnippet')
+const updateSnippet = async (req, res,next) => {
+    try{
+        await Snippet.updateOne({id: req.body.id},{
+            title: req.body.title,
+            content: req.body.content,
+        })
+        res.redirect('./all-snippets')
+    }catch(error) {
+        next(error)
+    }
+
+   
 }
 
 const deleteSnippet = async (req, res,next) => {
