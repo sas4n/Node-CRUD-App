@@ -3,29 +3,29 @@ const Schema = mongoose.Schema
 
 const snippetSchema = new Schema({
     title:{
-        type: string,
+        type: String,
         required: true,
         maxLength:60
     },
     content: {
-        type: string,
+        type: String,
         required: true,
         maxLength: 1000
     },
     ownerId: {
-        type: string,
+        type: String,
         required: true,
     }
 }, {timestamp : true})
 
 const userSchema = new Schema({
     username:{
-        type: string,
+        type: String,
         required: true,
         unique: true
     },
     password:{
-        type: string,
+        type: String,
         required: true,
         minLength:6,
         maxLength:100
