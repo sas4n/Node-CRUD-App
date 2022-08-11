@@ -45,9 +45,10 @@ const createSnippet = async (req, res,next) => {
             ownerId:"1"
             })
         await snippet.save()
+        req.session.flash = {type: "success", message:"Snippet created successfully"}
         res.redirect(302,'./all-snippets')
     }catch(error) {
-        next(error)
+        req.session.flash = {type: "error", message: error.message}
         res.render('./createSnippet')
     }
     
@@ -64,7 +65,9 @@ const updateSnippetForm = async (req, res,next) => {
         }
         res.render('snippets/editSnippet', {viewData})
     }catch(error) {
+        req.session.flash = {type: "error", message: error.message}
         next(error)
+        res.render('snippets/allSnippets')
     }
     
 }
@@ -75,9 +78,12 @@ const updateSnippet = async (req, res,next) => {
             title: req.body.title,
             content: req.body.content,
         })
-        res.redirect('./all-snippets')
+        req.session.flash = {type: "success", message:"Snippet updated successfully"}
+        res.redirect(302,'./all-snippets')
     }catch(error) {
+        req.session.flash = {type: "error", message: error.message}
         next(error)
+        res.render('snippets/allSnippets')
     }
 
    
@@ -86,8 +92,10 @@ const updateSnippet = async (req, res,next) => {
 const deleteSnippet = async (req, res,next) => {
     try{
         await Snippet.findByIdAndDelete(req.params.id)
+        req.session.flash = {type: "success", message:"Snippet deleted successfully"}
         res.redirect(302, '../all-snippets')
     }catch(err) {
+        req.session.flash = {type: "error", message: err.message}
         next(err)
         res.render('Snippets/allSnippets')
     }
