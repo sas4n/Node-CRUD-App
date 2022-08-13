@@ -37,10 +37,10 @@ userSchema.pre('save', async function() {
     this.password = await bcrypt.hash(this.password, 10)
 })
 
-userSchema.static.authenticate = async function(username, password) {
+userSchema.statics.authenticate = async function(username, password) {
     const user = await this.findOne({ username})
 
-    if (!user || !await bcrypt.compare(password, this.password)) {
+    if (!user || !(await bcrypt.compare(password, user.password))) {
         throw new Error('username/password is incorrect')
     }
     return user

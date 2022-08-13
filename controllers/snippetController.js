@@ -34,7 +34,16 @@ const getSnippet = async (req, res) => {
 }
 
 const getCreateSnippetForm = (req, res) => {
-    res.render('snippets/createSnippet')
+    try {
+        console.log('hereeee')
+        console.log(req.session)
+        res.render('snippets/createSnippet')
+    }catch(err) {
+        req.session.flash = {type: "error", message: err.message}
+        const {flash} = req.session
+        res.render('snippets/allSnippet, {flash')
+    }
+   
 }
 
 const createSnippet = async (req, res,next) => {
@@ -49,7 +58,8 @@ const createSnippet = async (req, res,next) => {
         res.redirect(302,'./all-snippets')
     }catch(error) {
         req.session.flash = {type: "error", message: error.message}
-        res.render('./createSnippet')
+        const {flash} = req.session
+        res.render('./createSnippet', {flash})
     }
     
     
