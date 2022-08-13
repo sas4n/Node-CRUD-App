@@ -1,4 +1,5 @@
 const {User} = require('../models/snippet')
+const {Snippet} = require('../models/snippet')
 
 const isAuth = (req, res, next) => {
     console.log('here')
@@ -11,6 +12,15 @@ const isAuth = (req, res, next) => {
    // error.status = 403
    // next(error)
    res.redirect('../all-Snippets')
+}
+
+const isAuthorized = (req, res, next) => {
+    if(req.session.userId === req.params.id){
+        return next()
+    }
+    const error = new Error('you are not authorized')
+    error.status = 403
+    return next(error)
 }
 
 const getSignupForm = (req, res) => {
@@ -54,5 +64,6 @@ module.exports = {
     postSignupForm,
     getLoginForm,
     postLoginForm,
-    isAuth
+    isAuth,
+    isAuthorized
 }
