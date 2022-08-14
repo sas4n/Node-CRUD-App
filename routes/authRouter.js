@@ -10,4 +10,6 @@ router
     .get('/login', authController.getLoginForm)
     .post('/login', authController.postLoginForm)
 
+router.post('/logout', authController.logout)
+
 module.exports = router

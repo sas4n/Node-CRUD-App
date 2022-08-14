@@ -16,9 +16,15 @@
                     <td>{{this.title}}</td>
                     <td><a href="/snippets/snippet/{{this.id}}">{{this.title}}</a></td>
                     <td>{{this.ownerId}}</td>
-                    <td><a href="/snippets/update-snippet/{{this.id}}">Edit</a></td>
+                    <td>
+                        <form action="/snippets/update-snippet/{{this.id}}?ownerId={{this.ownerId}}">
+                            <input type="hidden" name="ownerId" value={{this.ownerId}}>
+                            <input type="submit" name="edit" value="Edit">
+                        </form>
+                    </td>
                     <td>
                         <form action="/snippets/delete-snippet/{{this.id}}" method="post">
+                            <input type="hidden" name="ownerId" value={{this.ownerId}}>
                             <input type="submit" name="delete" value="Delete">
                         </form>
                     </td>
@@ -33,3 +39,6 @@
             </tbody>
     {{/if}}
 </table>
+<form method="POST" action="../authentication/logout">
+    <input type="submit" name="logout" value="Logout">
+</form>

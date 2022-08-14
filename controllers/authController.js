@@ -1,21 +1,24 @@
 const {User} = require('../models/snippet')
 const {Snippet} = require('../models/snippet')
 
-const isAuth = (req, res, next) => {
+const isAuthenticated = (req, res, next) => {
     console.log('here')
     console.log(req.session.userId)
     if(req.session.userId){
         return next()
     }
     //throw new Error({status: 403, message: 'you need to login first'})
-   // const error = new Error('Forbiden')
-   // error.status = 403
-   // next(error)
-   res.redirect('../all-Snippets')
+    const error = new Error('you need to login first')
+    error.status = 403
+    next(error)
+   //res.redirect('../authentication/login')
 }
 
 const isAuthorized = (req, res, next) => {
-    if(req.session.userId === req.params.id){
+    console.log('isAuthorized')
+    console.log(req.session.userId)
+    console.log(req.body.ownerId)
+    if(req.session.userId === req.body.ownerId || req.session.userId ===req.query.ownerId) {//query.ownerId for edit since it s a get request we can't send data and req.body.ownerId for delet since it s post request and we can send data
         return next()
     }
     const error = new Error('you are not authorized')
@@ -59,11 +62,21 @@ const postLoginForm = async (req, res) => {
     
 }
 
+const logout = (req, res, next) => {
+    req.session.destroy(err => {
+        if(err){
+            throw new Error('some error happened try again later')
+        }
+        res.redirect('/authentication/login')
+    })
+}
+
 module.exports = {
     getSignupForm,
     postSignupForm,
     getLoginForm,
     postLoginForm,
-    isAuth,
-    isAuthorized
+    isAuthenticated,
+    isAuthorized,
+    logout
 }

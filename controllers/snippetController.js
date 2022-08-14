@@ -41,7 +41,7 @@ const getCreateSnippetForm = (req, res) => {
     }catch(err) {
         req.session.flash = {type: "error", message: err.message}
         const {flash} = req.session
-        res.render('snippets/allSnippet, {flash')
+        res.render('snippets/allSnippet', {flash})
     }
    
 }
@@ -51,7 +51,7 @@ const createSnippet = async (req, res,next) => {
         const snippet = new Snippet({
             title: req.body.title,
             content: req.body.content,
-            ownerId:"1"
+            ownerId:req.session.userId
             })
         await snippet.save()
         req.session.flash = {type: "success", message:"Snippet created successfully"}
