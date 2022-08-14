@@ -3,12 +3,12 @@ const router = express.Router()
 const authController = require('../controllers/authController')
 
 router
-    .get('/signup', authController.getSignupForm)
-    .post('/signup', authController.postSignupForm)
+  .get('/signup', authController.getSignupForm)
+  .post('/signup', authController.postSignupForm)
 
 router
-    .get('/login', authController.getLoginForm)
-    .post('/login', authController.postLoginForm)
+  .get('/login', authController.getLoginForm)
+  .post('/login', authController.postLoginForm)
 
 router.post('/logout', authController.logout)
 

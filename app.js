@@ -11,23 +11,23 @@ const app = express()
 const yourMongoDbURIGoesHere = ''
 const mongoDb_URI = process.env.MONGODB_URI || yourMongoDbURIGoesHere
 
-mongoose.connect(mongoDb_URI, { useNewUrlParser: true,useUnifiedTopology: true})
-    .then(app.listen(5000, () => {console.log('server is running on port 5000')}))
-    .catch(err => {console.log(err)})
+mongoose.connect(mongoDb_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(app.listen(5000, () => { console.log('server is running on port 5000') }))
+  .catch(err => { console.log(err) })
 
 // Use `.hbs` for extensions and find partials in `views/partials`.
 app.engine('hbs', hbs.express4({
-    partialsDir: path.join(__dirname , 'views' , 'partials'),
-    defaultLayout: path.join(__dirname , 'views', 'layout', 'default')
-  }));
-  app.set('view engine', 'hbs');
-  app.set('views',path.join(__dirname , 'views'));
+  partialsDir: path.join(__dirname, 'views', 'partials'),
+  defaultLayout: path.join(__dirname, 'views', 'layout', 'default')
+}))
+app.set('view engine', 'hbs')
+app.set('views', path.join(__dirname, 'views'))
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use(express.urlencoded({ extended : false}))
+app.use(express.urlencoded({ extended: false }))
 
-const sessionSecretKey = '' //You can add your secret ket here
+const sessionSecretKey = '' // You can add your secret ket here
 
 const sessionOptions = {
   name: 'CRUD APP', // Don't use default session cookie name.
@@ -54,5 +54,3 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/homeRouter'))
 app.use('/snippets', require('./routes/snippetRouter'))
 app.use('/authentication', require('./routes/authRouter'))
-
-
