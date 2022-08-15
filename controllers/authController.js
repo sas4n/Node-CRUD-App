@@ -59,8 +59,8 @@ const postSignupForm = async (req, res) => {
     req.session.flash = { type: 'success', message: `user ${username} saved successfully` }
     res.redirect(302, './login')
   } catch (err) {
-    req.session.flash = { type: 'error', message: err.message }
-    console.log(err)
+   // errorHandler(err)
+    req.session.flash = { type: 'error', message: errorHandler(err) }
     res.redirect('signup')
   }
 }
@@ -87,8 +87,8 @@ const postLoginForm = async (req, res) => {
     req.session.flash = { type: 'success', message: `welcome ${username}` }
     res.redirect(302, '/snippets/all-Snippets')
   } catch (err) {
-    req.session.flash = { type: 'error', message: err.message }
-    res.redirect(302, './signup')
+    req.session.flash = { type: 'error', message: errorHandler(err) }
+    res.redirect(302, './login')
   }
 }
 
@@ -105,6 +105,18 @@ const logout = (req, res, next) => {
     }
     res.redirect('/authentication/login')
   })
+}
+
+const errorHandler = (err) => { 
+  let errorsMessage = ''
+  if(err.message.includes('User validation failed')){
+    errorsMessage = Object.values(err.errors)[0].properties.message
+    return errorsMessage
+  }
+  if(err.code === 11000){
+    errorsMessage = 'This username is not avaliable, select another username'
+    return errorsMessage
+  }
 }
 
 module.exports = {
