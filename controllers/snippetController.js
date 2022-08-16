@@ -1,4 +1,5 @@
 const { Snippet } = require('../models/snippet')
+const{errorHandler} = require('./authcontroller')
 
 /**
  *
@@ -50,7 +51,6 @@ const getSnippet = async (req, res, next) => {
     }
     res.render('snippets/snippet', { viewData })
   } catch (err) {
-    console.error(err)
     next(err)
   }
 }
@@ -66,7 +66,7 @@ const getCreateSnippetForm = (req, res) => {
     console.log(req.session)
     res.render('snippets/createSnippet')
   } catch (err) {
-    req.session.flash = { type: 'error', message: err.message }
+    req.session.flash = { type: 'error', message: errorHandler(err) }
     const { flash } = req.session
     res.render('snippets/allSnippet', { flash })
   }
@@ -88,8 +88,8 @@ const createSnippet = async (req, res, next) => {
     await snippet.save()
     req.session.flash = { type: 'success', message: 'Snippet created successfully' }
     res.redirect(302, './all-snippets')
-  } catch (error) {
-    req.session.flash = { type: 'error', message: error.message }
+  } catch (err) {
+    req.session.flash = { type: 'error', message: errorHandler(err) }
     const { flash } = req.session
     res.render('./createSnippet', { flash })
   }
@@ -107,13 +107,18 @@ const updateSnippetForm = async (req, res, next) => {
     const viewData = {
       id: snippet._id,
       title: snippet.title,
-      content: snippet.content
+      content: snippet.content,
+      ownerId: req.query.ownerId
     }
     res.render('snippets/editSnippet', { viewData })
-  } catch (error) {
-    req.session.flash = { type: 'error', message: error.message }
+  } catch (err) {
+    const errorsMessage = errorHandler(err)
+    if(errorsMessage) {
+      req.session.flash = { type: 'error', message: error.message }
+      return res.render('snippets/allSnippets')
+    }
     next(error)
-    res.render('snippets/allSnippets')
+    
   }
 }
 
@@ -131,9 +136,9 @@ const updateSnippet = async (req, res, next) => {
     })
     req.session.flash = { type: 'success', message: 'Snippet updated successfully' }
     res.redirect(302, './all-snippets')
-  } catch (error) {
-    req.session.flash = { type: 'error', message: error.message }
-    next(error)
+  } catch (err) {
+    req.session.flash = { type: 'error', message: err.message }
+    next(err)
     res.render('snippets/allSnippets')
   }
 }
@@ -152,7 +157,6 @@ const deleteSnippet = async (req, res, next) => {
   } catch (err) {
     req.session.flash = { type: 'error', message: err.message }
     next(err)
-    res.render('Snippets/allSnippets')
   }
 }
 

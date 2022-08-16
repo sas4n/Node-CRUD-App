@@ -5,13 +5,13 @@ const bcrypt = require('bcrypt')
 const snippetSchema = new Schema({
   title: {
     type: String,
-    required: true,
-    maxLength: 60
+    required: [true, 'All fields are required'],
+    maxLength: [60, 'You exceeds the maximum length of the field']
   },
   content: {
     type: String,
-    required: true,
-    maxLength: 1000
+    required: [true, 'All fields are required'],
+    maxLength: [1000, 'You exceed the maximum length of the field']
   },
   ownerId: {
     type: String,

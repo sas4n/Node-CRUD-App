@@ -29,6 +29,7 @@ const isAuthorized = (req, res, next) => {
   console.log('isAuthorized')
   console.log(req.session.userId)
   console.log(req.body.ownerId)
+  console.log(req.query.ownerId)
   if (req.session.userId === req.body.ownerId || req.session.userId === req.query.ownerId) { // query.ownerId for edit since it s a get request we can't send data and req.body.ownerId for delet since it s post request and we can send data
     return next()
   }
