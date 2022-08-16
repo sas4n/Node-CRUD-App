@@ -14,7 +14,7 @@ const isAuthenticated = (req, res, next) => {
   }
   // throw new Error({status: 403, message: 'you need to login first'})
   const error = new Error('you need to login first')
-  error.status = 403
+  error.status = 401
   next(error)
   // res.redirect('../authentication/login')
 }
@@ -32,7 +32,7 @@ const isAuthorized = (req, res, next) => {
   if (req.session.userId === req.body.ownerId || req.session.userId === req.query.ownerId) { // query.ownerId for edit since it s a get request we can't send data and req.body.ownerId for delet since it s post request and we can send data
     return next()
   }
-  const error = new Error('you are not authorized')
+  const error = new Error('You are not authorized to modify others\' snippets')
   error.status = 403
   return next(error)
 }

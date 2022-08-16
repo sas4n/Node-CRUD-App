@@ -33,7 +33,7 @@ nav ul li a:hover {
     color: rgba(255, 255, 255, 0.541);
 }
 
-.form-container{
+.form-container, .error-container {
     display: flex;
     flex-direction: column;
     align-items:center;

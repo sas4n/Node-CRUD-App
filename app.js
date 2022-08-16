@@ -5,6 +5,7 @@ const path = require('path')
 const hbs = require('express-hbs')
 const morgan = require('morgan')
 const session = require('express-session')
+const http_error= require('http-errors')
 
 const app = express()
 
@@ -54,3 +55,11 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/homeRouter'))
 app.use('/snippets', require('./routes/snippetRouter'))
 app.use('/authentication', require('./routes/authRouter'))
+app.use('*', (req, res, next) =>{
+  next(http_error(404,'Page does not exist'))
+})
+app.use((err,req, res, next) => {
+  res
+    .status(err.status)
+    .render(`errors/${err.status}`)
+})
