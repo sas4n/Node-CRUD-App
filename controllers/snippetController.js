@@ -39,12 +39,18 @@ const allSnippets = async (req, res, next) => {
 const getSnippet = async (req, res, next) => {
   try {
     const snippet = await Snippet.findById(req.params.id)
+    if(!snippet) {
+      const error = new Error('snippet not found')
+      error.status = 404
+      return next(error)
+    }
     const viewData = {
       title: snippet.title,
       content: snippet.content
     }
     res.render('snippets/snippet', { viewData })
   } catch (err) {
+    console.error(err)
     next(err)
   }
 }

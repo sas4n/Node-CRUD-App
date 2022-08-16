@@ -42,8 +42,13 @@ const isAuthorized = (req, res, next) => {
  * @param req
  * @param res
  */
-const getSignupForm = (req, res) => {
-  res.render('authentication/signup')
+const getSignupForm = (req, res, next) => {
+  try{
+    res.render('authentication/signup')
+  }catch(err){
+    next(err)
+  }
+ 
 }
 
 /**
@@ -69,8 +74,13 @@ const postSignupForm = async (req, res) => {
  * @param req
  * @param res
  */
-const getLoginForm = (req, res) => {
-  res.render('authentication/login')
+const getLoginForm = (req, res, next) => {
+  try {
+    res.render('authentication/login')
+  }catch (err) {
+    next(err)
+  }
+  
 }
 
 /**
@@ -101,7 +111,7 @@ const postLoginForm = async (req, res) => {
 const logout = (req, res, next) => {
   req.session.destroy(err => {
     if (err) {
-      throw new Error('some error happened try again later')
+      next(err)
     }
     res.redirect('/authentication/login')
   })
