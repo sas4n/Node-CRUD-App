@@ -119,7 +119,15 @@ const logout = (req, res, next) => {
 }
 
 const errorHandler = (err) => { 
+  console.log(Object.values(err.errors)[0].properties.message)
+  console.log(err.message)
   let errorsMessage = ''
+  if(err.message.includes('Snippet validation failed')){
+    console.log('already')
+    errorsMessage = Object.values(err.errors)[0].properties.message
+    console.log(errorsMessage)
+    return errorsMessage
+  }
   if(err.message.includes('User validation failed')){
     errorsMessage = Object.values(err.errors)[0].properties.message
     return errorsMessage
@@ -128,6 +136,7 @@ const errorHandler = (err) => {
     errorsMessage = 'This username is not avaliable, select another username'
     return errorsMessage
   }
+  
 }
 
 module.exports = {
@@ -137,5 +146,6 @@ module.exports = {
   postLoginForm,
   isAuthenticated,
   isAuthorized,
-  logout
+  logout,
+  errorHandler
 }
