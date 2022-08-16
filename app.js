@@ -59,7 +59,8 @@ app.use('*', (req, res, next) =>{
   next(http_error(404,'Page does not exist'))
 })
 app.use((err,req, res, next) => {
+  const errorStatus = err.status || 500
   res
-    .status(err.status)
-    .render(`errors/${err.status}`)
+    .status(errorStatus)
+    .render(`errors/${errorStatus}`)
 })
