@@ -19,10 +19,13 @@ const home = (req, res) => {
 const allSnippets = async (req, res, next) => {
   try {
     const viewData = {
+      showLogin: true,
+      isAuth: req.session.userId,
       snippets: (await Snippet.find({})).map(snippet => ({
         id: snippet._id,
         title: snippet.title,
-        ownerId: snippet.ownerId
+        ownerId: snippet.ownerId,
+        
       }))
     }
     res.render('snippets/allSnippets', { viewData })

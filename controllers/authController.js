@@ -45,7 +45,10 @@ const isAuthorized = (req, res, next) => {
  */
 const getSignupForm = (req, res, next) => {
   try{
-    res.render('authentication/signup')
+    const viewData = {
+      showLogin: true
+    }
+    res.render('authentication/signup', { viewData})
   }catch(err){
     next(err)
   }
@@ -77,6 +80,7 @@ const postSignupForm = async (req, res) => {
  */
 const getLoginForm = (req, res, next) => {
   try {
+    const viewData = {showLogin: true}
     res.render('authentication/login')
   }catch (err) {
     next(err)
@@ -98,8 +102,8 @@ const postLoginForm = async (req, res) => {
     req.session.flash = { type: 'success', message: `welcome ${username}` }
     res.redirect(302, '/snippets/all-Snippets')
   } catch (err) {
-    req.session.flash = { type: 'error', message: errorHandler(err) }
-    res.redirect(302, './login')
+    req.session.flash = { type: 'error', message: err.message }
+    res.redirect('login')
   }
 }
 
@@ -119,8 +123,7 @@ const logout = (req, res, next) => {
 }
 
 const errorHandler = (err) => { 
-  console.log(Object.values(err.errors)[0].properties.message)
-  console.log(err.message)
+  //console.log(err.message)
   let errorsMessage = ''
   if(err.message.includes('Snippet validation failed')){
     console.log('already')
