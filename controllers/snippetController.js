@@ -7,7 +7,10 @@ const{errorHandler} = require('./authcontroller')
  * @param res
  */
 const home = (req, res) => {
-  res.render('home/index')
+  const viewData = {
+    showLogin: true
+  }
+  res.render('home/index', { viewData })
   // res.send('hi')
 }
 /**
@@ -24,14 +27,13 @@ const allSnippets = async (req, res, next) => {
       snippets: (await Snippet.find({})).map(snippet => ({
         id: snippet._id,
         title: snippet.title,
-        ownerId: snippet.ownerId,
-        
+        ownerId: snippet.ownerId
       }))
     }
     res.render('snippets/allSnippets', { viewData })
   } catch (err) {
     next(err)
-    res.render('home/index')
+    
   }
 }
 

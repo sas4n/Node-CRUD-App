@@ -1,41 +1,52 @@
-<p>snippets</p>
-<a href="./create-snippet" class="btn">Create</a>
-<table>
-    <thead>
-        <tr>
-            <th>nr</th>
-            <th>title</th>
-            <th>owner</th>
-            <th colspan="2"></th>
-        </tr>
-    </thead>
-    {{#if viewData.snippets.length}}
-        {{#each viewData.snippets}}
-            <tbody>
-                <tr>
-                    <td>{{this.title}}</td>
-                    <td><a href="/snippets/snippet/{{this.id}}">{{this.title}}</a></td>
-                    <td>{{this.ownerId}}</td>
-                    <td>
-                        <form action="/snippets/update-snippet/{{this.id}}?ownerId={{this.ownerId}}">
-                            <input type="hidden" name="ownerId" value={{this.ownerId}}>
-                            <input type="submit" name="edit" value="Edit">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/snippets/delete-snippet/{{this.id}}" method="post">
-                            <input type="hidden" name="ownerId" value={{this.ownerId}}>
-                            <input type="submit" name="delete" value="Delete">
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        {{/each}}
-        {{else}}
-            <tbody>
-                <tr>
-                    <td colspan="5">No data to show</td>
-                </tr>
-            </tbody>
-    {{/if}}
-</table>
+<div class="container-lg">
+    <p class="display-3 text-center fw-bold">Snippets</p>
+    <div class="row justify-content-center">
+        <div class="col-8 ">
+            <div class="table-responsive-md">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Details</th>
+                            <th class="text-center">Modify</th>
+                        </tr>
+                    </thead>
+                    {{#if viewData.snippets.length}}
+                        {{#each viewData.snippets}}
+                            <tbody>
+                                <tr>  
+                                    <td>{{this.title}}</a></td>
+                                    <td><a href="/snippets/snippet/{{this.id}}" class="btn btn-info btn-sm">Details</a></td>
+                                    <td class="row justify-content-center">
+                                        <form class="col-4 col-md-3 "action="/snippets/update-snippet/{{this.id}}?ownerId={{this.ownerId}}">
+                                            <input type="hidden" name="ownerId" value={{this.ownerId}}>
+                                            <input type="submit" class="btn btn-primary m-1 btn-sm" name="edit" value="Edit">
+                                        </form>
+                                        <form class="col-4 col-md-3" action="/snippets/delete-snippet/{{this.id}}" method="post">
+                                            <input type="hidden" name="ownerId" value={{this.ownerId}}>
+                                            <input type="submit" class="btn btn-danger m-1 btn-sm" name="delete" value="Delete">
+                                        </form>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        {{/each}}
+                        {{else}}
+                            <tbody>
+                                <tr>
+                                    <td colspan="5">No data to show</td>
+                                </tr>
+                            </tbody>
+                    {{/if}}
+                </table>
+            </div>
+        </div>
+        
+        
+    </div>
+    <div class="row justify-content-center mx-4 justify-content-md-end">
+        <a href="./create-snippet" class="btn btn-secondary btn-sm col-3">Create a new snippet</a>
+    </div>
+    
+</div>
+   

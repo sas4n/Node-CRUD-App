@@ -6,15 +6,15 @@
                 
                 <li>
                     <form id="form" method="post" action="/authentication/logout">
-                        <button>logout</button>
+                        <button class="btn btn-danger btn-sm">logout</button>
                     </form>
                 </li>  
                 {{else}}
-                    <li><a href="/authentication/login" class="link">Log in</a></li>
+                    <li><a href="/authentication/login" class="btn btn-success btn-sm">Log in</a></li>
                 
                     
             {{/if}}
         {{/if}}
-            <li><a href="/snippets/all-snippets" class="link">snippets</a></li>
+            <li><a href="/snippets/all-snippets" class="btn btn-primary btn-sm">snippets</a></li>
     </ul>
 </nav>

@@ -22,10 +22,10 @@ nav ul {
 
 nav ul li {
     list-style-type: none;
-    margin-left: 0px;
+    margin-left: 5px;
 }
 
-nav ul li a {
+/*nav ul li a {
     text-decoration: none;
     color: white;
 }
@@ -53,12 +53,12 @@ nav ul li a:hover {
 }
 form > *{
     margin-top: 5px;
-}*/
+}
 .btn {
     width: 70px;
     align-self:center;
-}
-.buttons-container {
+}*/
+/*.buttons-container {
     display: flex;
     justify-content: space-between;
     padding: 0;
@@ -76,12 +76,12 @@ form > *{
   textarea {
       resize: none;
   }
-  form button {
+  /*form button {
       width: 40px;
       background-color: blueviolet;
       color: white
-  }
-#form {
+  }*/
+/*#form {
       height: 20px;
       width:50px;
-  }
+  }*/
