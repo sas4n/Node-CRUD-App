@@ -1,14 +1,12 @@
 
 <div class="container">
-<h3 class="text-center display-5 fw-bold text-muted">Login</h3>
+<h3 class="text-start display-5 fw-bold text-muted text-md-center">Login</h3>
 
 <form action="/authentication/login" method="post">
     <div class="row justify-content-center mb-3">
-        <div class="col-6">
+        <div class="col-10 col-md-6">
             <label for="username" class="form-label">username</label>
             <input type="text" class="form-control w-50" name="username" id="username" placeholder="Enter username" required>
-        
-        
             <label for="password" class="form-label">password</label>
             <input type="password" class="form-control w-50" name="password" id="password" placeholder="Enter password" required>
         </div>
@@ -16,9 +14,9 @@
     <div class="row justify-content-center mb-3">
         <div class="col col-md-8">
             <div class="row justify-content-center">
-                <div class="col-4">
-                    <a href="/authentication/signup" class="btn btn-primary">Sign up</a>
-                     <input type="submit" class="btn btn-primary" value="Login">
+                <div class="col-8 col-md-4">
+                    <a href="/authentication/signup" class="btn btn-primary mb-3">Sign up</a>
+                    <input type="submit" class="btn btn-primary mb-3" value="Login">
                 </div>
                 
             </div>
