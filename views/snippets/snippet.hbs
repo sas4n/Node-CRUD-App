@@ -1,4 +1,11 @@
-<label for="title">Title</label>
-<label for="title">{{viewData.title}}</label>
-<label for="snippet-content">Content</label>
-<textarea name="Snippet-content" id="snippet-content" cols="300" rows="20"  readonly>{{viewData.content}}</textarea>
+<div class="container">
+    <div class="my-4">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" value={{viewData.title}} readonly disabled/>
+    </div>
+    <div class="mb-4">
+        <label for="snippet-content" class="form-label">Content</label>
+        <textarea name="Snippet-content" class="form-control" id="snippet-content" rows="10"  readonly disabled>{{viewData.content}}</textarea>
+    </div>
+</div>
+
