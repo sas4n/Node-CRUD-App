@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/snippetController')
-const { isAuthenticated, isAuthorized } = require('../controllers/authController')
+const { isAuthenticated, isAuthorized } = require('../utils/utils')
 
 router.get('/all-snippets', controller.allSnippets)
 

@@ -11,7 +11,6 @@ const home = (req, res) => {
     showLogin: true
   }
   res.render('home/index', { viewData })
-  // res.send('hi')
 }
 /**
  *
@@ -108,6 +107,7 @@ const createSnippet = async (req, res, next) => {
 const updateSnippetForm = async (req, res, next) => {
   try {
     const snippet = await Snippet.findById(req.params.id)
+    //if user write some dummy id in the browser, next line would lead that request to a 404 page
     if(!snippet) {
       const error = new Error('snippet not found')
       error.status = 404
