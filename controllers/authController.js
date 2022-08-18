@@ -69,7 +69,7 @@ const postSignupForm = async (req, res) => {
     res.redirect(302, './login')
   } catch (err) {
    // errorHandler(err)
-    req.session.flash = { type: 'error', message: errorHandler(err) }
+    req.session.flash = { type: 'danger', message: errorHandler(err) }
     res.redirect('signup')
   }
 }
@@ -102,7 +102,7 @@ const postLoginForm = async (req, res) => {
     req.session.flash = { type: 'success', message: `welcome ${username}` }
     res.redirect(302, '/snippets/all-Snippets')
   } catch (err) {
-    req.session.flash = { type: 'error', message: err.message }
+    req.session.flash = { type: 'danger', message: err.message }
     res.redirect('login')
   }
 }

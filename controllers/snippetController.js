@@ -92,7 +92,7 @@ const createSnippet = async (req, res, next) => {
   } catch (err) {
     const errorMessage = errorHandler(err)
     if(errorMessage) {
-      req.session.flash = { type: 'error', message: errorMessage }
+      req.session.flash = { type: 'danger', message: errorMessage }
       return res.redirect('./create-snippet')
     }
     next(err)
@@ -142,7 +142,7 @@ const updateSnippet = async (req, res, next) => {
   } catch (err) {
     const errorMessage = errorHandler(err)
     if(errorMessage) {
-      req.session.flash = { type: 'error', message: errorMessage }
+      req.session.flash = { type: 'danger', message: errorMessage }
       return res.redirect('./update-snippet')
     }
     next(err)
