@@ -1,11 +1,15 @@
-<div class="form-container">
-    <form action="/snippets/update-snippet" method="POST" class="snippet-form">
+<div class="container">
+    <form action="/snippets/update-snippet" method="POST">
         <input type="hidden" name="id" value={{viewData.id}}>
         <input type="hidden" name="ownerId" value={{viewData.ownerId}}>
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" value={{viewData.title}} required>
-        <label for="snippet-content">Content</label>
-        <textarea name="content" id="snippet-content" cols="300" rows="20" placeholder="Type youe code here" spellcheck="true" required>{{viewData.content}}</textarea>
+        <div class="form-outline mb-4">
+            <label for="title" class="form-lable">Title</label>
+            <input type="text" class="form-control" name="title" id="title" value={{viewData.title}} required>
+        </div>
+        <div class="form-outline mb-4">
+            <label for="snippet-content" >Content</label>
+            <textarea name="content" class="form-control" id="snippet-content" rows="10" placeholder="Type youe code here" spellcheck="true" required>{{viewData.content}}</textarea>
+        </div>
         <input type="submit" class="btn btn-primary" value="Update">
     </form>
 </div>
