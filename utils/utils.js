@@ -1,8 +1,10 @@
 /**
- *
- * @param req
- * @param res
- * @param next
+ *A middleware function which in case of user is authenticated pass to the next function, otherwise throws an 401 error.
+
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
+ * @returns {Function} a callback function which let the next function to be called.
  */
 const isAuthenticated = (req, res, next) => {
   if (req.session.userId) {
@@ -14,10 +16,12 @@ const isAuthenticated = (req, res, next) => {
 }
 
 /**
- *
- * @param req
- * @param res
- * @param next
+ *It checks if a user is authorized to update or delete a snippet, otherwise it throws a 403 error.
+
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
+ * @returns {Function} a callback function which let the next function to be called.
  */
 const isAuthorized = (req, res, next) => {
   if (req.session.userId === req.body.ownerId || req.session.userId === req.query.ownerId) { // query.ownerId for edit since it s a get request we can't send data and req.body.ownerId for delet since it s post request and we can send data
@@ -29,8 +33,10 @@ const isAuthorized = (req, res, next) => {
 }
 
 /**
- *
- * @param err
+ *A function to handle the error for each occassion and returns the error message which will be used to show the error in case of not valid data provided or some required fields are empty.
+
+ * @param {object} err An error object.
+ * @returns {string} The error message.
  */
 const errorHandler = (err) => {
   let errorsMessage = ''
