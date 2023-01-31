@@ -1,12 +1,12 @@
 const { User } = require('../models/snippet')
-const{ errorHandler} = require('../utils/utils')
+const { errorHandler } = require('../utils/utils')
 
 /**
  * This middleware prepare the signup form for the user.
  *
- * @param req {Object} request object received from client.
- * @param res {Object} a number of days.
- * @param next {Function}
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
  */
 const getSignupForm = (req, res, next) => {
   try {
@@ -24,8 +24,8 @@ const getSignupForm = (req, res, next) => {
  *
  * @description
  *
- * @param req {number} Request object containing the sign up data.
- * @param res {Object} Response object will send back the response to the user after signing up.
+ * @param {object} req Request object containing the sign up data.
+ * @param {object} res Response object will send back the response to the user after signing up.
  */
 const postSignupForm = async (req, res) => {
   const { username, password } = req.body
@@ -40,10 +40,11 @@ const postSignupForm = async (req, res) => {
   }
 }
 /**
- *
- * @param req
- * @param res
- * @param next
+ *This function render the login page and in case of error pass it to next function.
+
+ * @param {object} req  Request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next A callback function which lets after execution of this function, the next function executed.
  */
 const getLoginForm = (req, res, next) => {
   try {
@@ -54,9 +55,10 @@ const getLoginForm = (req, res, next) => {
 }
 
 /**
- *
- * @param req
- * @param res
+ *This function authenticate the user and if the user is authenticated, it renders all-Snippets page, otherwise it redirects to the login page.
+
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
  */
 const postLoginForm = async (req, res) => {
   const { username, password } = req.body
@@ -73,10 +75,11 @@ const postLoginForm = async (req, res) => {
 }
 
 /**
- *
- * @param req
- * @param res
- * @param next
+ *This function destroy the session in order to logout and redirect to the login page.
+
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
  */
 const logout = (req, res, next) => {
   req.session.destroy(err => {
