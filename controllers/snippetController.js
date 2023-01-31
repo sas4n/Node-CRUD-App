@@ -4,8 +4,8 @@ const { errorHandler } = require('../utils/utils')
 /**
  *Prepare the home page and send it to user.
 
- * @param req {RequestObject} request object
- * @param res
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
  */
 const home = (req, res) => {
   const viewData = {
@@ -14,10 +14,11 @@ const home = (req, res) => {
   res.render('home/index', { viewData })
 }
 /**
- *
- * @param req
- * @param res
- * @param next
+ *This function shows all snippet .
+
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
  */
 const allSnippets = async (req, res, next) => {
   try {
@@ -37,10 +38,11 @@ const allSnippets = async (req, res, next) => {
 }
 
 /**
- *
- * @param req
- * @param res
- * @param next
+ *Shows the snippet that user are looking for or shows an error message that snippet not found.
+
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
  */
 const getSnippet = async (req, res, next) => {
   try {
@@ -61,10 +63,11 @@ const getSnippet = async (req, res, next) => {
 }
 
 /**
- *
- * @param req
- * @param res
- * @param next
+ *Shows the form for creating a new snippet.
+
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
  */
 const getCreateSnippetForm = (req, res, next) => {
   try {
@@ -75,10 +78,11 @@ const getCreateSnippetForm = (req, res, next) => {
 }
 
 /**
- *
- * @param req
- * @param res
- * @param next
+ *Creates a new snippet by sending it to model to be saved in database. After creating the snippet, redirect to all_snippet page.
+
+ * @param {object} req request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
  */
 const createSnippet = async (req, res, next) => {
   try {
@@ -101,10 +105,11 @@ const createSnippet = async (req, res, next) => {
 }
 
 /**
- *
- * @param req
- * @param res
- * @param next
+ * FInds the snippet in the database and shows it to the user. If the snippet does not exist a 404 error message will be shown.
+
+ *@param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
  */
 const updateSnippetForm = async (req, res, next) => {
   try {
@@ -128,10 +133,11 @@ const updateSnippetForm = async (req, res, next) => {
 }
 
 /**
- *
- * @param req
- * @param res
- * @param next
+ *Updates the snippet and redirects to all-snippet page.
+
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
  */
 const updateSnippet = async (req, res, next) => {
   try {
@@ -152,10 +158,11 @@ const updateSnippet = async (req, res, next) => {
 }
 
 /**
- *
- * @param req
- * @param res
- * @param next
+ *Deletes the snippet and redirects to all-snippets page.
+
+ * @param {object} req  request object received from client.
+ * @param {object} res Response object which sent to client.
+ * @param {Function} next a callback function which lets after execution of this function, the next function executed.
  */
 const deleteSnippet = async (req, res, next) => {
   try {
