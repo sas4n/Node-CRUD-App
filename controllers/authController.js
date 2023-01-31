@@ -1,26 +1,31 @@
 const { User } = require('../models/snippet')
+const{ errorHandler} = require('../utils/utils')
 
 /**
+ * This middleware prepare the signup form for the user.
  *
- * @param req
- * @param res
+ * @param req {Object} request object received from client.
+ * @param res {Object} a number of days.
+ * @param next {Function}
  */
 const getSignupForm = (req, res, next) => {
-  try{
+  try {
     const viewData = {
       showLogin: true
     }
-    res.render('authentication/signup', { viewData})
-  }catch(err){
+    res.render('authentication/signup', { viewData })
+  } catch (err) {
     next(err)
   }
- 
 }
 
 /**
+ * This middleware takes the request from router and takes care of data received in the post request.
  *
- * @param req
- * @param res
+ * @description
+ *
+ * @param req {number} Request object containing the sign up data.
+ * @param res {Object} Response object will send back the response to the user after signing up.
  */
 const postSignupForm = async (req, res) => {
   const { username, password } = req.body
@@ -38,14 +43,14 @@ const postSignupForm = async (req, res) => {
  *
  * @param req
  * @param res
+ * @param next
  */
 const getLoginForm = (req, res, next) => {
   try {
     res.render('authentication/login')
-  }catch (err) {
+  } catch (err) {
     next(err)
   }
-  
 }
 
 /**
@@ -57,7 +62,7 @@ const postLoginForm = async (req, res) => {
   const { username, password } = req.body
   try {
     const user = await User.authenticate(username, password)
-    //For authorization
+    // For authorization
     req.session.userId = user._id
     req.session.flash = { type: 'success', message: `welcome ${username}` }
     res.redirect(302, '/snippets/all-Snippets')
@@ -82,12 +87,10 @@ const logout = (req, res, next) => {
   })
 }
 
-
-
 module.exports = {
   getSignupForm,
   postSignupForm,
   getLoginForm,
   postLoginForm,
-  logout,
+  logout
 }

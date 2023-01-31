@@ -22,12 +22,12 @@ const snippetSchema = new Schema({
 const userSchema = new Schema({
   username: {
     type: String,
-    required: [true,'All fields are required'],
+    required: [true, 'All fields are required'],
     unique: true
   },
   password: {
     type: String,
-    required: [true,'All fields are required'],
+    required: [true, 'All fields are required'],
     minLength: [10, 'password should be at least 10 characters'],
     maxLength: 100
   }

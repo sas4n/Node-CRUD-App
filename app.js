@@ -3,16 +3,15 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const path = require('path')
 const hbs = require('express-hbs')
-const morgan = require('morgan')
 const session = require('express-session')
-const http_error= require('http-errors')
+const httpError = require('http-errors')
 
 const app = express()
 
 const yourMongoDbURIGoesHere = ''
-const mongoDb_URI = process.env.MONGODB_URI || yourMongoDbURIGoesHere
+const mongoDbURI = process.env.MONGODB_URI || yourMongoDbURIGoesHere
 
-mongoose.connect(mongoDb_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoDbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(app.listen(5000, () => { console.log('server is running on port 5000') }))
   .catch(err => { console.log(err) })
 
@@ -55,10 +54,10 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/homeRouter'))
 app.use('/snippets', require('./routes/snippetRouter'))
 app.use('/authentication', require('./routes/authRouter'))
-app.use('*', (req, res, next) =>{
-  next(http_error(404,'Page does not exist'))
+app.use('*', (req, res, next) => {
+  next(httpError(404, 'Page does not exist'))
 })
-app.use((err,req, res, next) => {
+app.use((err, req, res, next) => {
   const errorStatus = err.status || 500
   res
     .status(errorStatus)

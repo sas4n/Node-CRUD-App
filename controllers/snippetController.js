@@ -1,9 +1,10 @@
 const { Snippet } = require('../models/snippet')
-const{errorHandler} = require('./authcontroller')
+const { errorHandler } = require('../utils/utils')
 
 /**
- *
- * @param req
+ *Prepare the home page and send it to user.
+
+ * @param req {RequestObject} request object
  * @param res
  */
 const home = (req, res) => {
@@ -32,7 +33,6 @@ const allSnippets = async (req, res, next) => {
     res.render('snippets/allSnippets', { viewData })
   } catch (err) {
     next(err)
-    
   }
 }
 
@@ -40,11 +40,12 @@ const allSnippets = async (req, res, next) => {
  *
  * @param req
  * @param res
+ * @param next
  */
 const getSnippet = async (req, res, next) => {
   try {
     const snippet = await Snippet.findById(req.params.id)
-    if(!snippet) {
+    if (!snippet) {
       const error = new Error('snippet not found')
       error.status = 404
       return next(error)
@@ -63,6 +64,7 @@ const getSnippet = async (req, res, next) => {
  *
  * @param req
  * @param res
+ * @param next
  */
 const getCreateSnippetForm = (req, res, next) => {
   try {
@@ -90,7 +92,7 @@ const createSnippet = async (req, res, next) => {
     res.redirect(302, './all-snippets')
   } catch (err) {
     const errorMessage = errorHandler(err)
-    if(errorMessage) {
+    if (errorMessage) {
       req.session.flash = { type: 'danger', message: errorMessage }
       return res.redirect('./create-snippet')
     }
@@ -107,8 +109,8 @@ const createSnippet = async (req, res, next) => {
 const updateSnippetForm = async (req, res, next) => {
   try {
     const snippet = await Snippet.findById(req.params.id)
-    //if user write some dummy id in the browser, next line would lead that request to a 404 page
-    if(!snippet) {
+    // if user write some dummy id in the browser, next line would lead that request to a 404 page
+    if (!snippet) {
       const error = new Error('snippet not found')
       error.status = 404
       return next(error)
@@ -121,7 +123,7 @@ const updateSnippetForm = async (req, res, next) => {
     }
     res.render('snippets/editSnippet', { viewData })
   } catch (err) {
-      next(err)
+    next(err)
   }
 }
 
@@ -141,7 +143,7 @@ const updateSnippet = async (req, res, next) => {
     res.redirect(302, './all-snippets')
   } catch (err) {
     const errorMessage = errorHandler(err)
-    if(errorMessage) {
+    if (errorMessage) {
       req.session.flash = { type: 'danger', message: errorMessage }
       return res.redirect('./update-snippet')
     }
