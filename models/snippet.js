@@ -38,9 +38,10 @@ userSchema.pre('save', async function () {
 })
 
 /**
- *
- * @param username
- * @param password
+ *Compares the password user provides by the on in database and if user is authenticated, returns the user.
+
+ * @param {string} username usernam.
+ * @param {string} password password.
  */
 userSchema.statics.authenticate = async function (username, password) {
   const user = await this.findOne({ username })
