@@ -8,6 +8,7 @@ const httpError = require('http-errors')
 
 const app = express()
 
+// Your mongoDb utl goes here or you can create a dot env file and have it there.
 const yourMongoDbURIGoesHere = ''
 const mongoDbURI = process.env.MONGODB_URI || yourMongoDbURIGoesHere
 
@@ -59,7 +60,10 @@ app.use('*', (req, res, next) => {
 })
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500
+  const viewData = {
+    pageTitle: `Error ${errorStatus}`
+  }
   res
     .status(errorStatus)
-    .render(`errors/${errorStatus}`)
+    .render(`errors/${errorStatus}`, { viewData })
 })

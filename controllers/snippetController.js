@@ -9,6 +9,7 @@ const { errorHandler } = require('../utils/utils')
  */
 const home = (req, res) => {
   const viewData = {
+    pageTitle: 'Home',
     showLogin: true
   }
   res.render('home/index', { viewData })
@@ -23,6 +24,7 @@ const home = (req, res) => {
 const allSnippets = async (req, res, next) => {
   try {
     const viewData = {
+      pageTitle: 'All-Snippets',
       showLogin: true,
       isAuth: req.session.userId,
       snippets: (await Snippet.find({})).map(snippet => ({
@@ -53,6 +55,7 @@ const getSnippet = async (req, res, next) => {
       return next(error)
     }
     const viewData = {
+      pageTitle: 'Snippet',
       title: snippet.title,
       content: snippet.content
     }
@@ -70,8 +73,11 @@ const getSnippet = async (req, res, next) => {
  * @param {Function} next a callback function which lets after execution of this function, the next function executed.
  */
 const getCreateSnippetForm = (req, res, next) => {
+  const viewData = {
+    pageTitle: 'Creat a Snippet'
+  }
   try {
-    res.render('snippets/createSnippet')
+    res.render('snippets/createSnippet', { viewData})
   } catch (err) {
     next(err)
   }

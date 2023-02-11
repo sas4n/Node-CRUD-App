@@ -11,6 +11,7 @@ const { errorHandler } = require('../utils/utils')
 const getSignupForm = (req, res, next) => {
   try {
     const viewData = {
+      pageTitle: 'Register',
       showLogin: true
     }
     res.render('authentication/signup', { viewData })
@@ -47,8 +48,11 @@ const postSignupForm = async (req, res) => {
  * @param {Function} next A callback function which lets after execution of this function, the next function executed.
  */
 const getLoginForm = (req, res, next) => {
+  const viewData = {
+    pageTitle: 'Login'
+  }
   try {
-    res.render('authentication/login')
+    res.render('authentication/login', { viewData})
   } catch (err) {
     next(err)
   }
