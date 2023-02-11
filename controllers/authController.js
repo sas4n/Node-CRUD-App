@@ -52,7 +52,7 @@ const getLoginForm = (req, res, next) => {
     pageTitle: 'Login'
   }
   try {
-    res.render('authentication/login', { viewData})
+    res.render('authentication/login', { viewData })
   } catch (err) {
     next(err)
   }

@@ -77,7 +77,7 @@ const getCreateSnippetForm = (req, res, next) => {
     pageTitle: 'Creat a Snippet'
   }
   try {
-    res.render('snippets/createSnippet', { viewData})
+    res.render('snippets/createSnippet', { viewData })
   } catch (err) {
     next(err)
   }
