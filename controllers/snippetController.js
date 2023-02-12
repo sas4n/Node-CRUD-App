@@ -127,6 +127,7 @@ const updateSnippetForm = async (req, res, next) => {
       return next(error)
     }
     const viewData = {
+      pageTitle: 'Edit',
       id: snippet._id,
       title: snippet.title,
       content: snippet.content,
@@ -147,7 +148,7 @@ const updateSnippetForm = async (req, res, next) => {
  */
 const updateSnippet = async (req, res, next) => {
   try {
-    await Snippet.updateOne({ id: req.body.id }, {
+    await Snippet.updateOne({ _id: req.body.id }, {
       title: req.body.title,
       content: req.body.content
     })
